@@ -222,3 +222,33 @@ kubectl logs helm-operator-<id> -n flux
 helm list --namespace=dev
 helm uninstall airflow-dev -n dev
 ```
+
+
+# lambda function code snipit
+```
+import json
+import subprocess
+
+def lambda_handler(event, context):
+    # TODO implement
+    records = event['Records'][0]['s3']
+    bucket_name = records['bucket']['name']
+    file_name = records['object']['key']
+    process_data = 's3://' + bucket_name + '/' + file_name
+    print('WCD_LOGGING. Current process data ' + process_data)
+    #endpoint = 'http://100.26.52.50:8080/api/experimental/dags/emr_job_flow_manual_steps_dag/dag_runs'
+    endpoint = 'http://a7ee9621871d44b198d075a377b54082-736234513.us-east-1.elb.amazonaws.com:8080/api/experimental/dags/emr_job_flow_manual_steps_dag/dag_runs'
+    data = json.dumps({'conf': {'s3_location': process_data}})
+    # call another api, can see for the incoming files, what is the partition columns, what is the input options etc
+    # TODO, think about how to enrich the step to make it truely configuration driven.
+    #     data = json.dump({'conf': {'s3_location': process_data, }})
+
+    # curl -v -X POST http://af15fbba358f24a39b4dee81341e150c-1683699660.us-east-1.elb.amazonaws.com:8080/api/experimental/dags/parallel_dag/dag_runs 
+    # -H "Authorization: 'token dGVzdF91c2VyOnRIMXNJc0FQQHNzdzByZA=='" --insecure -d "{}"
+    subprocess.run(['curl', '-X', 'POST', endpoint, '-H', "Authorization: 'token dGVzdF91c2VyOnRIMXNJc0FQQHNzdzByZA=='", '--insecure', '-d', data])
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
+
+```
