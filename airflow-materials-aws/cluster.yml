@@ -1,0 +1,31 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: ${YOUR_CLUSTER_NAME}
+  region: us-east-1
+  version: "1.19"
+
+managedNodeGroups:
+  - name: workers
+    instanceType: m5.large
+    privateNetworking: true
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 3
+    volumeSize: 20
+    ssh:
+      allow: true
+      publicKeyName: ${YOU_CAN_CREATE_A_KEY_IN_EC2_CONSOLE}
+    labels: { role: worker }
+    tags:
+      nodegroup-role: worker
+    iam:
+      withAddonPolicies:
+        ebs: true
+        imageBuilder: true
+        efs: true
+        albIngress: true
+        autoScaler: true
+        cloudWatch: true
+        externalDNS: true
