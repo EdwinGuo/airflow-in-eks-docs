@@ -182,6 +182,29 @@ requests.post('http://a9be71af0c7e94ad1acddbcb4119b82a-7275127.us-east-1.elb.ama
 # How to enable the oidc authentication with AWS eks on pod level
 ```
 https://www.youtube.com/watch?v=bu0M2y2g1m8
+
+# audience
+sts.amazonaws.com
+
+# trust relationship json blob
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::197306934454:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/638FCA19B424AD2DA14E3DF9D31A0575"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/638FCA19B424AD2DA14E3DF9D31A0575:sub": "system:serviceaccount:dev:app"
+        }
+      }
+    }
+  ]
+}
+
 ```
 
 # How to make helm chart working as github pages
@@ -251,4 +274,10 @@ def lambda_handler(event, context):
         'body': json.dumps('Hello from Lambda!')
     }
 
+```
+
+# TO setup superset
+```'
+https://qiita.com/andy971022/items/91adc5c826f95ee4ea42
+https://stackoverflow.com/questions/41632581/how-to-connect-superset-with-aws-athena
 ```
