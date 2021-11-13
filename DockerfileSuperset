@@ -1,0 +1,2 @@
+FROM apache/superset
+RUN pip install "PyAthena>1.2.0"
