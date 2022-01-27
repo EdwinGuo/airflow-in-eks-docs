@@ -282,3 +282,17 @@ https://qiita.com/andy971022/items/91adc5c826f95ee4ea42
 https://stackoverflow.com/questions/41632581/how-to-connect-superset-with-aws-athena
 awsathena+rest://-:x@athena.us-east-1.amazonaws.com/data_engineer_bootcamp2?s3_staging_dir=s3://data-engineer-bootcamp2-landing-zone/athena
 ```
+
+
+
+## Setting up with Kind
+```
+
+
+
+port forwaring:
+ssh -i ~/.ssh/edwin-demo.pem -L 8080:localhost:8080 ec2-user@54.226.61.41
+
+access service:
+http://localhost:8080/home
+```
