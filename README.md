@@ -288,11 +288,12 @@ awsathena+rest://-:x@athena.us-east-1.amazonaws.com/data_engineer_bootcamp2?s3_s
 ## Setting up with Kind
 ```
 
+-- kubectl forward first with ClusterIP
+kubectl port-forward service/airflow-dev-webserver 8080:8080 -n dev
 
-
-port forwaring:
+-- port forwaring:
 ssh -i ~/.ssh/edwin-demo.pem -L 8080:localhost:8080 ec2-user@54.226.61.41
 
-access service:
+-- access service:
 http://localhost:8080/home
 ```
