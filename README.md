@@ -296,4 +296,7 @@ ssh -i ~/.ssh/edwin-demo.pem -L 8080:localhost:8080 ec2-user@54.226.61.41
 
 -- access service:
 http://localhost:8080/home
+
+-- delete cluster
+kind delete cluster --name kind
 ```
