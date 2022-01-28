@@ -288,6 +288,9 @@ awsathena+rest://-:x@athena.us-east-1.amazonaws.com/data_engineer_bootcamp2?s3_s
 ## Setting up with Kind
 ```
 
+-- create kind cluster
+kind create cluster
+
 -- kubectl forward first with ClusterIP
 kubectl port-forward service/airflow-dev-webserver 8080:8080 -n dev
 
