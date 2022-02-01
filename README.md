@@ -303,3 +303,21 @@ http://localhost:8080/home
 -- delete cluster
 kind delete cluster --name kind
 ```
+
+# argo workflow
+```
+kubectl create namespace argo
+kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/install.yaml
+
+kubectl -n argo port-forward service/argo-server 2746:2746
+
+== forward
+ssh -i ~/.ssh/edwin-demo.pem -L 2746:localhost:2746 ec2-user@54.226.61.41
+
+-- UI:
+https://localhost:2746/
+
+-- get token
+kubectl exec --stdin --tty argo-server-79bf45b5b7-bc2nt -n argo argo auth token
+
+```
