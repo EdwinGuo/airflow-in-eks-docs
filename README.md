@@ -56,6 +56,7 @@ curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 
 
 # Check the version
 helm version --short
+curl -L https://git.io/get_helm.sh | bash -s -- --version v3.8.2
 
 # Download the stable repo
 helm repo add stable https://charts.helm.sh/stable
